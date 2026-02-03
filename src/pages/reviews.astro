@@ -1,0 +1,280 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+type Review = {
+  name: string;
+  picture: string;
+  title: string;
+  firm_name: string;
+  review: string;
+};
+
+const reviews = (await import('../../reviews.json')).default as Review[];
+
+const totalReviews = reviews.length;
+const uniqueFirms = new Set(reviews.map((review) => review.firm_name)).size;
+
+const getInitials = (name: string) =>
+  name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0].toUpperCase())
+    .join('');
+---
+
+<Layout
+  title="Client Reviews - Fransisco Wiles Marketing"
+  description="See what law firms and agencies say about working with Fransisco Wiles on legal marketing and paid media."
+>
+  <section class="reviews-hero">
+    <div class="container">
+      <div class="reviews-hero-content">
+        <p class="reviews-kicker">Client reviews</p>
+        <h1>Proof you can feel confident putting ad spend in my hands</h1>
+        <p class="reviews-lede">
+          I work with law firms and agencies that need campaigns to perform under pressure.
+          Here’s what partners, directors, and agency owners have to say after we’ve worked together.
+        </p>
+        <div class="reviews-metrics">
+          <div class="metric">
+            <span class="metric-value">{totalReviews}+</span>
+            <span class="metric-label">Client reviews</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value">$300,000+</span>
+            <span class="metric-label">Monthly ad spend managed (As of Jan 24th)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews-grid-section">
+    <div class="container">
+      <div class="reviews-grid">
+        {reviews.map((review) => (
+          <article class="review-card card">
+            <div class="review-header">
+              <div class="review-avatar">
+                <img
+                  src={`/reviews/${review.picture}`}
+                  alt={`${review.name} headshot`}
+                  class="review-avatar-img"
+                  width="52"
+                  height="52"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="review-avatar-fallback" aria-hidden="true">
+                  {getInitials(review.name)}
+                </span>
+              </div>
+              <div>
+                <h3 class="review-name">{review.name}</h3>
+                <p class="review-title">
+                  {review.title} · {review.firm_name}
+                </p>
+              </div>
+            </div>
+            <p class="review-quote">“{review.review}”</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews-cta">
+    <div class="container">
+      <div class="reviews-cta-card card">
+        <div class="reviews-text-limit">
+          <h2>Ready for reviews like these?</h2>
+          <p>
+            Let’s talk about what you’re trying to accomplish and build a plan that drives the right cases.
+          </p>
+        </div>
+        <a href="https://calendly.com/fwiles/30min" class="btn btn-primary" target="_blank" rel="noopener">
+          Schedule your FREE strategy call
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .reviews-hero {
+    padding: var(--space-12) 0 var(--space-8);
+  }
+
+  .reviews-hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .reviews-kicker {
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    font-weight: 600;
+  }
+
+  .reviews-hero h1 {
+    font-size: 2.6rem;
+  }
+
+  .reviews-lede {
+    max-width: 640px;
+    font-size: 1.125rem;
+    color: var(--muted-foreground);
+  }
+
+  .reviews-hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .reviews-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .metric {
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    background: white;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .metric-value {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--foreground);
+  }
+
+  .metric-label {
+    font-size: var(--text-xs);
+    color: var(--muted-foreground);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .reviews-grid-section {
+    padding: var(--space-8) 0 var(--space-12);
+  }
+
+  .reviews-grid {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+
+  .review-card {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .review-header {
+    display: flex;
+    gap: var(--space-4);
+    align-items: center;
+  }
+
+  .review-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(49, 133, 252, 0.12);
+    color: var(--primary);
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid white;
+    box-shadow: var(--shadow-card);
+  }
+
+  .review-avatar-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+  }
+
+  .review-name {
+    margin-bottom: var(--space-1);
+  }
+
+  .review-title {
+    font-size: var(--text-xs);
+    color: var(--muted-foreground);
+    margin: 0;
+  }
+
+  .review-quote {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--foreground);
+  }
+
+  .reviews-cta {
+    padding-bottom: var(--space-16);
+  }
+
+  .reviews-cta-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .reviews-text-limit {
+    max-width: min(400px, 100%);
+  }
+
+  .reviews-cta-card h2 {
+    margin-bottom: var(--space-2);
+  }
+
+  .reviews-cta-card p {
+    margin-bottom: 0;
+    color: var(--muted-foreground);
+  }
+
+  @media (max-width: 768px) {
+    .reviews-hero {
+      padding: var(--space-8) 0;
+    }
+
+    .reviews-hero h1 {
+      font-size: 2rem;
+    }
+
+    .reviews-lede {
+      font-size: 1rem;
+    }
+
+    .reviews-cta-card {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .reviews-cta-card .btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>

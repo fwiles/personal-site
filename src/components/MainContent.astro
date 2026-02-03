@@ -1,0 +1,206 @@
+---
+// Main content combining About and Goals sections
+---
+
+<section class="main-content">
+  <div class="container">
+    <!-- About Section -->
+    <h1 class="main-title">
+      How I can help you drive higher quality leads and sign more cases
+    </h1>
+
+    <h2 class="section-subtitle">
+      Who the heck am I, and why I can help
+    </h2>
+
+    <ul class="content-list">
+      <li>
+        I'm the Director of Paid Media at <a href="https://webris.org/" target="_blank" rel="noopener">Webris: Law Firm Marketing Agency</a>.
+        My team and I are currently managing $200,000+ a month in ad spend across Google and Meta ads with
+        <a href="https://webris.org/results/" target="_blank" rel="noopener">amazing results</a>.
+      </li>
+      <li>
+        Previously I've worked at CAMG as a Paid Media manager managing over $200,000 in ad spend for some of the largest personal injury and mesothelioma law firms in the country.
+      </li>
+      <li>
+        I'm actively consulting with marketing agencies to improve their legal ad campaigns from small solo criminal defense lawyers to large lead mass tort lead brokers.
+      </li>
+    </ul>
+
+    <!-- Goals Section -->
+    <h2 class="section-subtitle">
+      What's your goal today?
+    </h2>
+
+    <div class="goals-content">
+      <!-- Option 1: Law Firms -->
+      <div class="goal-option">
+        <h3 class="goal-title">You're a law firm wanting to hire an agency</h3>
+        <p>
+          If you're looking for a long term partner dedicated to your growth with a proven track record,
+          schedule a meeting with me and the Webris team
+          <a href="https://calendly.com/fwiles/30min" target="_blank" rel="noopener">here</a>.
+        </p>
+        <p>We can help you with:</p>
+        <ul class="content-list">
+          <li>SEO + GEO</li>
+          <li>Google + LSA Ads</li>
+          <li>Meta Ads</li>
+          <li>Web design</li>
+        </ul>
+        <p>
+          We've successfully grown law firms in these practice areas: Personal Injury, Family Law,
+          Criminal Defense, Real Estate, Immigration, SSDI, Nursing Home Abuse, Employment Law,
+          Traffic tickets, Property Damage, and more.
+        </p>
+        <a href="https://calendly.com/fwiles/30min" class="btn btn-primary" target="_blank" rel="noopener">
+          Schedule your FREE strategy session
+        </a>
+      </div>
+
+      <!-- Option 2: Agencies -->
+      <div class="goal-option">
+        <h3 class="goal-title">You're an agency looking to improve your legal clients campaign performance</h3>
+        <p>
+          I've helped Webris launch their PPC services starting as a contractor. I've
+          <a href="/reviews">helped numerous agencies</a> run successful legal campaigns from as little as $2,500
+          a month to well over $100,000 a month in ad spend.
+        </p>
+        <p>How I can help you:</p>
+        <ul class="content-list">
+          <li>Weekly, bi-weekly, or monthly consulting calls with you or team giving actionable steps to improve campaign performance.</li>
+          <li>
+            White label SEO and Paid media management through Webris
+            <ul class="content-sublist">
+              <li>
+                I brought together a
+                <a href="https://www.camginc.com/webris/" target="_blank" rel="noopener">successful partnership between CAMG and Webris</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <a href="https://calendly.com/fwiles/30min" class="btn btn-primary" target="_blank" rel="noopener">
+          Schedule your FREE strategy session
+        </a>
+      </div>
+
+      <!-- Option 3: Learning -->
+      <div class="goal-option">
+        <h3 class="goal-title">Learn how to run your ads better</h3>
+        <p>
+          I occasionally write articles and make videos on how I am growing my clients. Media buying,
+          landing page design, CRO, creative strategy, script writing and filming, and more.
+        </p>
+        <a href="/articles" class="btn btn-primary">
+          Read my articles here
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .main-content {
+    padding: var(--space-12) 0;
+  }
+
+  .main-title {
+    font-family: var(--font-display);
+    font-size: var(--text-2xl);
+    margin-bottom: var(--space-8);
+    text-align: left;
+    line-height: 1.2;
+  }
+
+  .section-subtitle {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-6);
+    margin-top: var(--space-8);
+    color: var(--foreground);
+    text-align: left;
+  }
+
+  .content-list {
+    list-style-position: outside;
+    padding-left: var(--space-6);
+    margin-bottom: var(--space-6);
+  }
+
+  .content-list li {
+    margin-bottom: var(--space-4);
+    line-height: 1.7;
+  }
+
+  .content-sublist {
+    list-style-type: circle;
+    padding-left: var(--space-6);
+    margin-top: var(--space-2);
+  }
+
+  .content-list a,
+  .goals-content a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .content-list a:hover,
+  .goals-content a:hover {
+    color: var(--primary-hover);
+  }
+
+  .goals-content .btn {
+    color: white;
+  }
+
+  .goals-content .btn:hover {
+    color: white;
+  }
+
+  .goals-content {
+    margin-top: var(--space-6);
+  }
+
+  .goal-option {
+    margin-bottom: var(--space-12);
+  }
+
+  .goal-option:last-child {
+    margin-bottom: 0;
+  }
+
+  .goal-title {
+    font-family: var(--font-body);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+    line-height: 1.4;
+    color: var(--foreground);
+  }
+
+  .goal-option p {
+    margin-bottom: var(--space-4);
+    line-height: 1.7;
+  }
+
+  .goal-option .btn {
+    margin-top: var(--space-4);
+    display: inline-block;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .main-content {
+      padding: var(--space-8) 0;
+    }
+
+    .main-title {
+      font-size: 1.75rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+    }
+  }
+</style>

@@ -1,0 +1,83 @@
+---
+// Footer component with links and legal information
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-divider"></div>
+
+    <div class="footer-links">
+      <a href="/sitemap" class="footer-link">Sitemap</a>
+      <span class="footer-separator">|</span>
+      <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+      <span class="footer-separator">|</span>
+      <a href="/fulfillment-policy" class="footer-link">Fulfillment Policy</a>
+    </div>
+
+    <p class="footer-text">
+      © {currentYear} Fransisco Wiles Marketing LLC. All rights reserved.
+    </p>
+
+    <p class="footer-disclaimer">
+      I am a legal marketer, but not your legal marketer. Results may vary based on your specific case.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    margin-top: var(--space-16);
+    padding: var(--space-8) 0 var(--space-6);
+  }
+
+  .footer-divider {
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border) 20%,
+      var(--border) 80%,
+      transparent
+    );
+    margin-bottom: var(--space-8);
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .footer-link {
+    font-size: var(--text-xs);
+    color: var(--muted-foreground);
+  }
+
+  .footer-link:hover {
+    color: var(--primary);
+  }
+
+  .footer-separator {
+    color: var(--muted-foreground);
+    font-size: var(--text-xs);
+  }
+
+  .footer-text {
+    font-size: var(--text-xs);
+    color: var(--muted-foreground);
+    text-align: center;
+    margin-bottom: var(--space-2);
+  }
+
+  .footer-disclaimer {
+    font-size: var(--text-xs);
+    color: var(--muted-foreground);
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 0;
+  }
+</style>

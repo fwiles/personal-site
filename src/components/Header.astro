@@ -1,0 +1,88 @@
+---
+// Header component with logo and navigation
+---
+
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <a href="/" class="logo-link">
+        <img src="/fransisco-head-logo.png" alt="Fransisco Wiles Marketing" class="logo" />
+      </a>
+      <nav class="nav">
+        <a href="/articles" class="nav-link">Articles</a>
+        <a href="/reviews" class="nav-link">Reviews</a>
+        <a href="/connect" class="nav-link">Connect</a>
+        <a href="https://calendly.com/fwiles/30min" class="btn btn-primary" target="_blank" rel="noopener">
+          Schedule a FREE strategy call
+        </a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    padding: var(--space-4) 0;
+    background: var(--background);
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .logo-link {
+    display: block;
+    line-height: 0;
+  }
+
+  .logo {
+    height: 48px;
+    width: auto;
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .logo:hover {
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+
+  .nav-link {
+    font-size: var(--text-sm);
+    color: var(--muted-foreground);
+    font-weight: 700;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .logo {
+      height: 40px;
+    }
+
+    .nav .btn {
+      display: none;
+    }
+  }
+</style>

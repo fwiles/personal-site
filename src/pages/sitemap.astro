@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { EXCLUDED_SITEMAP_PATHS } from '../sitemap-exclude';
+
+const pageEntries = Object.keys(
+  import.meta.glob('/src/pages/**/*.{astro,md,mdx}')
+);
+
+const routes = pageEntries
+  .map((file) => {
+    let route = file
+      .replace(/^\/src\/pages/, '')
+      .replace(/\.(astro|md|mdx)$/, '');
+
+    if (route.endsWith('/index')) {
+      route = route.slice(0, -'/index'.length);
+    }
+
+    return route === '' ? '/' : route;
+  })
+  .filter((route) => !route.includes('['))
+  .filter((route) => !EXCLUDED_SITEMAP_PATHS.has(route));
+
+const uniqueRoutes = Array.from(new Set(routes)).sort();
+---
+
+<Layout
+  title="Sitemap - Fransisco Wiles Marketing"
+  description="HTML sitemap for Fransisco Wiles Marketing."
+>
+  <section class="policy">
+    <div class="container">
+      <div class="rich-text">
+        <h1>Sitemap</h1>
+        <p>
+          This is the HTML sitemap. The XML sitemap is available at
+          <a href="/sitemap.xml">/sitemap.xml</a>.
+        </p>
+        <ul>
+          {uniqueRoutes.map((route) => (
+            <li>
+              <a href={route}>{route}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .policy {
+    padding: var(--space-12) 0 var(--space-16);
+  }
+
+  @media (max-width: 768px) {
+    .policy {
+      padding: var(--space-8) 0 var(--space-12);
+    }
+  }
+</style>
