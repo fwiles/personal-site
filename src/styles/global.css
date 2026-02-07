@@ -33,6 +33,7 @@
 
   /* Layout */
   --content-max-width: 56rem;
+  --content-max-width-narrow: 40rem;
   --section-spacing: 2rem;
 
   /* Borders & Radii */
@@ -183,6 +184,12 @@ li {
 /* Container */
 .container {
   max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+.container-narrow {
+  max-width: var(--content-max-width-narrow);
   margin: 0 auto;
   padding: 0 var(--space-4);
 }
