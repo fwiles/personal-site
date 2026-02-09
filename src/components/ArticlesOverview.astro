@@ -1,0 +1,196 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type ArticleEntry = CollectionEntry<"articles">;
+
+type Props = {
+    articles: ArticleEntry[];
+};
+
+const { articles } = Astro.props;
+
+const uniqueTags = Array.from(
+  new Set(articles.flatMap((article) => article.data.tags))
+).sort((a, b) => a.localeCompare(b));
+
+const formatDate = (date: Date) => {
+    const day = String(date.getDate()).padStart(2, "0");
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+};
+---
+
+<section class="articles-overview">
+    <div class="container">
+        <h1>Article</h1>
+        <div class="articles-filter">
+            <label for="articles-tag-filter">Filter by tag</label>
+            <select id="articles-tag-filter" aria-label="Filter articles by tag">
+                <option value="all">All tags</option>
+                {uniqueTags.map((tag) => (
+                    <option value={tag}>{tag}</option>
+                ))}
+            </select>
+        </div>
+        {
+            articles.length === 0 ? (
+                <p class="articles-empty">No articles yet.</p>
+            ) : (
+                <div class="articles-list">
+                    {articles.map((article) => (
+                        <article
+                            class="articles-row"
+                            data-tags={article.data.tags.join(",")}
+                        >
+                            <div class="articles-title">
+                                <a href={`/articles/${article.slug}`}>
+                                    {article.data.title}
+                                </a>
+                            </div>
+                            <div class="articles-meta">
+                                <span class="articles-date">
+                                    {formatDate(article.data.date)}
+                                </span>
+                                <span class="articles-tags">
+                                    {article.data.tags.map((tag) => (
+                                        <span class="articles-tag">{tag}</span>
+                                    ))}
+                                </span>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            )
+        }
+    </div>
+</section>
+
+<script>
+    const select = document.getElementById("articles-tag-filter");
+    const rows = Array.from(document.querySelectorAll(".articles-row"));
+
+    if (select) {
+        select.addEventListener("change", (event) => {
+            const value = event.target?.value ?? "all";
+            rows.forEach((row) => {
+                const tags = row.getAttribute("data-tags")?.split(",") ?? [];
+                const shouldShow = value === "all" || tags.includes(value);
+                row.style.display = shouldShow ? "" : "none";
+            });
+        });
+    }
+</script>
+
+<style>
+    .articles-overview {
+        padding: var(--space-12) 0 var(--space-16);
+    }
+
+    .articles-overview h1 {
+        margin-bottom: var(--space-8);
+        font-size: 2.4rem;
+    }
+
+    .articles-empty {
+        color: var(--muted-foreground);
+    }
+
+    .articles-filter {
+        display: flex;
+        align-items: center;
+        gap: var(--space-3);
+        margin-bottom: var(--space-6);
+    }
+
+    .articles-filter label {
+        font-size: var(--text-sm);
+        color: var(--muted-foreground);
+    }
+
+    .articles-filter select {
+        border: 1px solid var(--border);
+        border-radius: var(--radius-sm);
+        padding: 0.45rem 0.75rem;
+        font-size: var(--text-sm);
+        background: white;
+        color: var(--foreground);
+    }
+
+    .articles-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+    }
+
+    .articles-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: var(--space-4);
+        padding: var(--space-4) 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .articles-title a {
+        color: var(--foreground);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .articles-title a:hover {
+        color: var(--primary);
+    }
+
+    .articles-meta {
+        display: flex;
+        align-items: center;
+        gap: var(--space-4);
+        justify-content: flex-end;
+        color: var(--muted-foreground);
+        font-size: var(--text-sm);
+        text-align: right;
+    }
+
+    .articles-tags {
+        display: inline-flex;
+        gap: var(--space-2);
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .articles-tag {
+        padding: 0.15rem 0.5rem;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--foreground);
+    }
+
+    @media (max-width: 768px) {
+        .articles-overview {
+            padding: var(--space-8) 0 var(--space-12);
+        }
+
+        .articles-overview h1 {
+            font-size: 2rem;
+        }
+
+        .articles-row {
+            grid-template-columns: 1fr;
+            align-items: flex-start;
+        }
+
+        .articles-meta {
+            width: 100%;
+            justify-content: space-between;
+            gap: var(--space-3);
+        }
+
+        .articles-tags {
+            justify-content: flex-start;
+        }
+    }
+</style>

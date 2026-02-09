@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArticlesOverview from '../components/ArticlesOverview.astro';
+import { getCollection } from 'astro:content';
+
+const articles = (await getCollection('articles')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Layout
+  title="Articles - Fransisco Wiles Marketing"
+  description="Read articles and insights from Fransisco Wiles on legal marketing, paid media, and growth strategies."
+>
+  <ArticlesOverview articles={articles} />
+</Layout>

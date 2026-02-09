@@ -1,0 +1,211 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((article) => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+type Props = {
+  article: CollectionEntry<'articles'>;
+};
+
+const { article } = Astro.props;
+const { Content } = await article.render();
+
+const formatDate = (date: Date) => {
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};
+---
+
+<Layout title={article.data.title} description={article.data.description}>
+  <article class="article">
+    <div class="container">
+      <header class="article-header">
+        <p class="article-meta">
+          <span>{formatDate(article.data.date)}</span>
+          <span class="article-tags">
+            {article.data.tags.map((tag) => (
+              <span class="article-tag">{tag}</span>
+            ))}
+          </span>
+        </p>
+        <h1>{article.data.title}</h1>
+        <p class="article-description">{article.data.description}</p>
+      </header>
+      <div class="article-hero">
+        <img src={article.data.heroImage} alt={article.data.title} loading="eager" decoding="async" />
+      </div>
+      <div class="rich-text">
+        <Content />
+      </div>
+      <footer class="article-author card">
+        {article.data.author.avatar ? (
+          <img
+            src={article.data.author.avatar}
+            alt={article.data.author.name}
+            class="article-author-avatar"
+            width="72"
+            height="72"
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <div class="article-author-avatar article-author-fallback" aria-hidden="true">
+            {article.data.author.name
+              .split(' ')
+              .filter(Boolean)
+              .slice(0, 2)
+              .map((part) => part[0]?.toUpperCase())
+              .join('')}
+          </div>
+        )}
+        <div>
+          <p class="article-author-name">{article.data.author.name}</p>
+          <p class="article-author-title">{article.data.author.title}</p>
+          <p class="article-author-bio">{article.data.author.bio}</p>
+          <div class="article-author-socials">
+            {article.data.author.socials.map((social) => (
+              <a href={social.url} target="_blank" rel="noopener">
+                {social.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </footer>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .article {
+    padding: var(--space-12) 0 var(--space-16);
+  }
+
+  .article-header {
+    display: grid;
+    gap: var(--space-4);
+    margin-bottom: var(--space-8);
+  }
+
+  .article-description {
+    margin: 0;
+    color: var(--muted-foreground);
+    max-width: 720px;
+    font-size: 1.05rem;
+  }
+
+  .article-hero {
+    margin-bottom: var(--space-8);
+  }
+
+  .article-hero img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    display: block;
+    max-height: 420px;
+    object-fit: cover;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    align-items: center;
+    color: var(--muted-foreground);
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+
+  .article-tags {
+    display: inline-flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .article-tag {
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--foreground);
+  }
+
+  .article-author {
+    margin-top: var(--space-12);
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+
+  .article-author-avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .article-author-fallback {
+    background: rgba(49, 133, 252, 0.12);
+    color: var(--primary);
+    font-weight: 700;
+    display: grid;
+    place-items: center;
+    border: 2px solid white;
+    box-shadow: var(--shadow-card);
+  }
+
+  .article-author-name {
+    margin: 0 0 var(--space-1);
+    font-weight: 700;
+  }
+
+  .article-author-title {
+    margin: 0;
+    color: var(--muted-foreground);
+    font-size: var(--text-sm);
+  }
+
+  .article-author-bio {
+    margin: var(--space-2) 0 0;
+    color: var(--muted-foreground);
+    font-size: var(--text-sm);
+    max-width: 520px;
+  }
+
+  .article-author-socials {
+    margin-top: var(--space-3);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+  }
+
+  .article-author-socials a {
+    color: var(--foreground);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .article-author-socials a:hover {
+    border-bottom-color: currentColor;
+  }
+
+  @media (max-width: 768px) {
+    .article {
+      padding: var(--space-8) 0 var(--space-12);
+    }
+  }
+</style>
