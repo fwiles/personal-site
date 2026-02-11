@@ -15,7 +15,8 @@ const articles = defineCollection({
     description: z.string(),
     date: z.date(),
     tags: z.array(z.string()),
-    heroImage: z.string(),
+    heroImage: z.string().optional(),
+    heroVideo: z.string().url().optional(),
     author: z.object({
       name: z.string(),
       title: z.string(),
