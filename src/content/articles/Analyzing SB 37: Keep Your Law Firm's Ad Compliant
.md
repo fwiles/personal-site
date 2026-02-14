@@ -9,7 +9,7 @@ author:
   name: "Fransisco Wiles"
   title: "Director of Paid Media"
   bio: "I help law firms and legal agencies run ads campaigns the generate signed cases."
-  avatar: "/Site Photos/suit-picture.jpg"
+  avatar: "/article-images/suit-picture.jpg"
   socials:
     - label: "LinkedIn"
       url: "https://www.linkedin.com/in/fransisco-wiles/"
