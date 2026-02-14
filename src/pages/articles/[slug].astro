@@ -91,7 +91,7 @@ const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowfullscreen
                                 loading="lazy"
-                            ></iframe>
+                            />
                         </div>
                     </div>
                 ) : article.data.heroImage ? (
@@ -168,7 +168,8 @@ const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
     .article-header {
         display: grid;
         gap: var(--space-4);
-        margin-bottom: var(--space-8);
+        margin-top: var(--space-8);
+        margin-bottom: var(--space-4);
     }
 
     .article-description {
