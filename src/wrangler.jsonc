@@ -1,6 +1,6 @@
 {
   "name": "personal-site",
-  "compatibility_date": "YYYY-MM-DD", // Update to the day you deploy
+  "compatibility_date": "2026-02-14", // Update to the day you deploy
   "assets": {
     "directory": "./dist",
   },
