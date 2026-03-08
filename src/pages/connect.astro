@@ -1,0 +1,91 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const email = "f@fransiscowiles.com";
+const linkedInUrl = "https://www.linkedin.com/in/fransisco-wiles/";
+---
+
+<Layout
+    title="Connect - Fransisco Wiles Marketing"
+    description="Get in touch with Fransisco Wiles by email or connect on LinkedIn."
+>
+    <section class="connect">
+        <div class="container">
+            <div class="connect-shell card">
+                <p class="connect-kicker">Connect</p>
+                <h1>Reach out directly.</h1>
+                <p class="connect-lede">
+                    If you want to talk, email me directly or connect with me on
+                    LinkedIn.
+                </p>
+
+                <div class="connect-actions">
+                    <a class="btn btn-primary" href={`mailto:${email}`}>
+                        Email {email}
+                    </a>
+                    <a
+                        class="btn btn-secondary"
+                        href={linkedInUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        Connect on LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .connect {
+        padding: var(--space-12) 0 var(--space-16);
+    }
+
+    .connect-shell {
+        max-width: 42rem;
+        margin: 0 auto;
+        text-align: center;
+        display: grid;
+        gap: var(--space-4);
+        padding: var(--space-12) var(--space-6);
+    }
+
+    .connect-kicker {
+        margin-bottom: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        font-size: 0.75rem;
+        color: var(--muted-foreground);
+        font-weight: 600;
+    }
+
+    .connect-lede {
+        max-width: 34rem;
+        margin: 0 auto;
+        color: var(--muted-foreground);
+        font-size: var(--text-lg);
+    }
+
+    .connect-actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: var(--space-4);
+        margin-top: var(--space-2);
+    }
+
+    @media (max-width: 768px) {
+        .connect-shell {
+            padding: var(--space-8) var(--space-4);
+        }
+
+        .connect-actions {
+            flex-direction: column;
+        }
+
+        .connect-actions :global(.btn) {
+            width: 100%;
+        }
+    }
+</style>
