@@ -1,5 +1,7 @@
 ---
 // Footer component with links and legal information
+import { footerLinks, siteConfig } from "../site";
+
 const currentYear = new Date().getFullYear();
 ---
 
@@ -8,19 +10,22 @@ const currentYear = new Date().getFullYear();
     <div class="footer-divider"></div>
 
     <div class="footer-links">
-      <a href="/sitemap" class="footer-link">Sitemap</a>
-      <span class="footer-separator">|</span>
-      <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
-      <span class="footer-separator">|</span>
-      <a href="/fulfillment-policy" class="footer-link">Fulfillment Policy</a>
+      {
+        footerLinks.map((link, index) => (
+          <>
+            {index > 0 && <span class="footer-separator">|</span>}
+            <a href={link.href} class="footer-link">{link.label}</a>
+          </>
+        ))
+      }
     </div>
 
     <p class="footer-text">
-      © {currentYear} Fransisco Wiles Marketing LLC. All rights reserved.
+      © {currentYear} {siteConfig.companyName}. All rights reserved.
     </p>
 
     <p class="footer-disclaimer">
-      I am a legal marketer, but not your legal marketer. Results may vary based on your specific case.
+      {siteConfig.footerDisclaimer}
     </p>
   </div>
 </footer>

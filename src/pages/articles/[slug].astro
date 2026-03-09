@@ -2,6 +2,13 @@
 import Layout from "../../layouts/Layout.astro";
 import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
+import {
+    buildArticleStructuredData,
+    calculateReadTimeMinutes,
+    formatArticleDate,
+    getArticleImage,
+    toYouTubeEmbedUrl,
+} from "../../utils/articles";
 
 export async function getStaticPaths() {
     const articles = await getCollection("articles");
@@ -18,65 +25,17 @@ type Props = {
 const { article } = Astro.props;
 const { Content } = await article.render();
 
-const formatDate = (date: Date) => {
-    const day = String(date.getUTCDate()).padStart(2, "0");
-    const month = String(date.getUTCMonth() + 1).padStart(2, "0");
-    const year = date.getUTCFullYear();
-    return `${month}/${day}/${year}`;
-};
-
-const toYouTubeEmbedUrl = (url: string) => {
-    try {
-        const parsed = new URL(url);
-        const host = parsed.hostname.replace(/^www\./, "");
-        let videoId = "";
-
-        if (host === "youtu.be") {
-            videoId = parsed.pathname.slice(1);
-        } else if (host === "youtube.com" || host === "m.youtube.com") {
-            if (parsed.pathname === "/watch") {
-                videoId = parsed.searchParams.get("v") ?? "";
-            } else if (parsed.pathname.startsWith("/embed/")) {
-                videoId = parsed.pathname.split("/")[2] ?? "";
-            } else if (parsed.pathname.startsWith("/shorts/")) {
-                videoId = parsed.pathname.split("/")[2] ?? "";
-            }
-        }
-
-        if (!videoId) {
-            return "";
-        }
-
-        return `https://www.youtube.com/embed/${videoId}`;
-    } catch {
-        return "";
-    }
-};
-
 const heroVideoEmbedUrl = article.data.heroVideo
     ? toYouTubeEmbedUrl(article.data.heroVideo)
     : "";
 
-const wordCount = article.body.trim().split(/\s+/).filter(Boolean).length;
-const readTimeMinutes = Math.max(1, Math.ceil(wordCount / 200));
+const readTimeMinutes = calculateReadTimeMinutes(article.body);
 const canonicalPath = `/articles/${article.slug}`;
-const articleImage = article.data.heroImage ?? article.data.author.avatar ?? "/article-images/suit-picture.jpg";
-const articleStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: article.data.title,
-    description: article.data.description,
-    datePublished: article.data.date.toISOString(),
-    author: {
-        "@type": "Person",
-        name: article.data.author.name,
-        jobTitle: article.data.author.title,
-        url: "https://fransiscowiles.com/",
-        sameAs: article.data.author.socials.map((social) => social.url),
-    },
-    mainEntityOfPage: `https://fransiscowiles.com${canonicalPath}`,
-    image: [`https://fransiscowiles.com${articleImage}`],
-};
+const articleImage = getArticleImage(article);
+const articleStructuredData = buildArticleStructuredData(
+    article,
+    canonicalPath
+);
 ---
 
 <Layout
@@ -92,7 +51,7 @@ const articleStructuredData = {
             <header class="article-header">
                 <h1>{article.data.title}</h1>
                 <p class="article-meta">
-                    <span>{formatDate(article.data.date)}</span>
+                    <span>{formatArticleDate(article.data.date)}</span>
                     <span class="article-tags">
                         {
                             article.data.tags.map((tag) => (

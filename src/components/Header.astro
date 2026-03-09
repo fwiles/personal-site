@@ -1,5 +1,6 @@
 ---
 // Header component with logo and navigation
+import { primaryNavItems, siteConfig } from "../site";
 ---
 
 <header class="header">
@@ -13,20 +14,18 @@
                 />
             </a>
             <nav class="nav">
-                <a href="/articles" class="nav-link nav-desktop-item">
-                    Articles
-                </a>
-                <a href="/reviews" class="nav-link nav-desktop-item">
-                    Reviews
-                </a>
-                <a href="/connect" class="nav-link nav-desktop-item">
-                    Connect
-                </a>
+                {
+                    primaryNavItems.map((item) => (
+                        <a href={item.href} class="nav-link nav-desktop-item">
+                            {item.label}
+                        </a>
+                    ))
+                }
                 <a
                     href="/schedule"
                     class="btn btn-primary nav-desktop-item"
                 >
-                    Schedule a FREE strategy call
+                    {siteConfig.headerCtaLabel}
                 </a>
                 <button
                     type="button"
@@ -52,11 +51,15 @@
                 ×
             </button>
             <div class="nav-panel-content">
-                <a href="/articles" class="nav-panel-link">Articles</a>
-                <a href="/reviews" class="nav-panel-link">Reviews</a>
-                <a href="/connect" class="nav-panel-link">Connect</a>
+                {
+                    primaryNavItems.map((item) => (
+                        <a href={item.href} class="nav-panel-link">
+                            {item.label}
+                        </a>
+                    ))
+                }
                 <a href="/schedule" class="btn btn-primary nav-panel-cta">
-                    Schedule your FREE Consultation
+                    {siteConfig.headerCtaLabel}
                 </a>
             </div>
         </div>

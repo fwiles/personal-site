@@ -1,29 +1,30 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import MainContent from '../components/MainContent.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import MainContent from "../components/MainContent.astro";
+import { siteConfig } from "../site";
 
 const personStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Fransisco Wiles',
-  url: 'https://fransiscowiles.com/',
-  image: 'https://fransiscowiles.com/article-images/suit-picture.jpg',
-  jobTitle: 'Director of Paid Media',
-  worksFor: {
-    '@type': 'Organization',
-    name: 'Webris',
-    url: 'https://webris.org/',
-  },
-  sameAs: ['https://www.linkedin.com/in/fransisco-wiles/'],
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.personName,
+    url: `${siteConfig.siteUrl}/`,
+    image: `${siteConfig.siteUrl}${siteConfig.defaultOgImage}`,
+    jobTitle: "Director of Paid Media",
+    worksFor: {
+        "@type": "Organization",
+        name: "Webris",
+        url: "https://webris.org/",
+    },
+    sameAs: [siteConfig.linkedInUrl],
 };
 ---
 
 <Layout
-  title="Fransisco Wiles Marketing - Legal Marketing Expert"
-  description="I help law firms and legal agencies run successful ad campaigns. Get higher quality leads, sign more cases, and take your firm to new heights."
-  structuredData={personStructuredData}
+    title="Fransisco Wiles - Legal Marketing Expert"
+    description="I help law firms and legal agencies run successful ad campaigns. Get higher quality leads, sign more cases, and take your firm to new heights."
+    structuredData={personStructuredData}
 >
-  <Hero />
-  <MainContent />
+    <Hero />
+    <MainContent />
 </Layout>

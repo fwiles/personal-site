@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { siteConfig } from "../site";
 import "../styles/global.css";
 
 interface Props {
@@ -15,15 +16,15 @@ interface Props {
 
 const {
     title,
-    description = "Law firm and legal agency marketing expert. Get higher quality leads, sign more cases, and grow your firm with proven ad campaigns.",
+    description = siteConfig.defaultDescription,
     canonicalPath = Astro.url.pathname,
-    ogImage = "/article-images/suit-picture.jpg",
+    ogImage = siteConfig.defaultOgImage,
     ogType = "website",
     noindex = false,
     structuredData,
 } = Astro.props;
 
-const siteUrl = Astro.site ?? new URL("https://fransiscowiles.com");
+const siteUrl = Astro.site ?? new URL(siteConfig.siteUrl);
 const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
 const resolvedOgImage = new URL(ogImage, siteUrl).toString();
 const robotsContent = noindex ? "noindex, nofollow" : "index, follow";
@@ -42,7 +43,7 @@ const structuredDataPayload = structuredData
         <link rel="icon" type="image/png" href="/fransisco-head-logo-m.png" />
         <link rel="canonical" href={canonicalUrl} />
 
-        <meta property="og:site_name" content="Fransisco Wiles Marketing" />
+        <meta property="og:site_name" content={siteConfig.siteName} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:url" content={canonicalUrl} />

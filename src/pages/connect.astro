@@ -1,12 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const email = "f@fransiscowiles.com";
-const linkedInUrl = "https://www.linkedin.com/in/fransisco-wiles/";
+import { siteConfig } from "../site";
 ---
 
 <Layout
-    title="Connect | Fransisco Wiles Marketing"
+    title="Connect | Fransisco Wiles"
     description="Get in touch with Fransisco Wiles by email or connect on LinkedIn."
 >
     <section class="connect">
@@ -20,12 +18,15 @@ const linkedInUrl = "https://www.linkedin.com/in/fransisco-wiles/";
                 </p>
 
                 <div class="connect-actions">
-                    <a class="btn btn-primary" href={`mailto:${email}`}>
-                        Email {email}
+                    <a
+                        class="btn btn-primary"
+                        href={`mailto:${siteConfig.email}`}
+                    >
+                        Email {siteConfig.email}
                     </a>
                     <a
                         class="btn btn-secondary"
-                        href={linkedInUrl}
+                        href={siteConfig.linkedInUrl}
                         target="_blank"
                         rel="noreferrer"
                     >
