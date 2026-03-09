@@ -6,12 +6,30 @@ import "../styles/global.css";
 interface Props {
     title: string;
     description?: string;
+    canonicalPath?: string;
+    ogImage?: string;
+    ogType?: "website" | "article";
+    noindex?: boolean;
+    structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
     title,
     description = "Law firm and legal agency marketing expert. Get higher quality leads, sign more cases, and grow your firm with proven ad campaigns.",
+    canonicalPath = Astro.url.pathname,
+    ogImage = "/article-images/suit-picture.jpg",
+    ogType = "website",
+    noindex = false,
+    structuredData,
 } = Astro.props;
+
+const siteUrl = Astro.site ?? new URL("https://fransiscowiles.com");
+const canonicalUrl = new URL(canonicalPath, siteUrl).toString();
+const resolvedOgImage = new URL(ogImage, siteUrl).toString();
+const robotsContent = noindex ? "noindex, nofollow" : "index, follow";
+const structuredDataPayload = structuredData
+    ? JSON.stringify(structuredData)
+    : null;
 ---
 
 <!doctype html>
@@ -19,8 +37,22 @@ const {
     <head>
         <meta charset="UTF-8" />
         <meta name="description" content={description} />
+        <meta name="robots" content={robotsContent} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/png" href="/fransisco-head-logo-m.png" />
+        <link rel="canonical" href={canonicalUrl} />
+
+        <meta property="og:site_name" content="Fransisco Wiles Marketing" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:type" content={ogType} />
+        <meta property="og:image" content={resolvedOgImage} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={resolvedOgImage} />
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -31,6 +63,14 @@ const {
         />
 
         <title>{title}</title>
+        {
+            structuredDataPayload && (
+                <script
+                    type="application/ld+json"
+                    set:html={structuredDataPayload}
+                />
+            )
+        }
     </head>
     <body>
         <Header />

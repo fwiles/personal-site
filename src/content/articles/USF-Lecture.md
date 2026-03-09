@@ -1,6 +1,6 @@
 ---
 title: "USF Lecture"
-description: ""
+description: "Fransisco Wiles shares lessons from a guest lecture at USF on paid media, digital advertising, and building a career in marketing."
 date: 2025-08-31
 tags:
   - Lecture

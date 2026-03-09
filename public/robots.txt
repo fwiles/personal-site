@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fransiscowiles.com/sitemap.xml

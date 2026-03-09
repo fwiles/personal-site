@@ -1,6 +1,6 @@
 ---
 title: "Analyzing SB 37: Keep Your Law Firm's Ad Compliant"
-description: ""
+description: "Fransisco Wiles breaks down California SB 37, what it changes for legal ads, and how law firms can stay compliant while still generating cases."
 date: 2026-02-10
 tags:
   - Podcast
