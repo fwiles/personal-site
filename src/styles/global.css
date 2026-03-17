@@ -151,6 +151,27 @@ li {
     line-height: 1.7;
 }
 
+.rich-text img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: var(--space-8) 0;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.rich-text p > img:only-child,
+.rich-text p > a:only-child > img {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.rich-text a > img {
+    display: block;
+}
+
 .rich-text ul {
     list-style-position: outside;
     padding-left: var(--space-6);
@@ -200,6 +221,12 @@ li {
 @media (min-width: 768px) {
     .container {
         padding: 0 var(--space-8);
+    }
+}
+
+@media (max-width: 767px) {
+    .rich-text img {
+        margin: var(--space-6) 0;
     }
 }
 
