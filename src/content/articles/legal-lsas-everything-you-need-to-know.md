@@ -3,7 +3,7 @@ title: "Legal LSAs: Everything You Need to Know"
 description: "Learn how Legal Services Ads work, why they stop spending, and how to fix them with simple, practical advice from years of legal ad experience."
 date: 2026-03-17
 tags:
-  - LSAs
+  - LSA
 heroImage: "/article-images/LSA-Search-Results.png"
 author:
   name: "Fransisco Wiles"
