@@ -1,0 +1,125 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const recoveryLinks = [
+    { href: "/", label: "Go to homepage" },
+    { href: "/articles", label: "Read articles" },
+    { href: "/reviews", label: "See reviews" },
+    { href: "/connect", label: "Connect directly" },
+];
+---
+
+<Layout
+    title="Page Not Found | Fransisco Wiles"
+    description="The page you were looking for could not be found. Use the links below to get back on track."
+    noindex={true}
+>
+    <section class="not-found">
+        <div class="container">
+            <div class="not-found-card">
+                <p class="not-found-kicker">404</p>
+                <h1>You took a wrong turn.</h1>
+                <p class="not-found-copy">
+                    That page does not exist anymore, or the link was broken.
+                    The fastest way forward is to book a strategy call, or jump
+                    back into the main sections of the site below.
+                </p>
+
+                <div class="not-found-actions">
+                    <a href="/schedule" class="btn btn-primary">
+                        Schedule your FREE strategy call
+                    </a>
+                    <a href="/" class="btn btn-secondary">
+                        Back to homepage
+                    </a>
+                </div>
+
+                <div class="not-found-links">
+                    {
+                        recoveryLinks.map((link) => (
+                            <a href={link.href} class="not-found-link card">
+                                <span>{link.label}</span>
+                            </a>
+                        ))
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .not-found {
+        padding: var(--space-12) 0 var(--space-16);
+    }
+
+    .not-found-card {
+        max-width: 48rem;
+        margin: 0 auto;
+        padding: var(--space-8);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        background:
+            radial-gradient(circle at top, rgba(49, 133, 252, 0.12), transparent 40%),
+            white;
+        box-shadow: var(--shadow-card);
+        text-align: center;
+    }
+
+    .not-found-kicker {
+        margin-bottom: var(--space-2);
+        color: var(--primary);
+        font-size: var(--text-sm);
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+    }
+
+    .not-found-copy {
+        max-width: 38rem;
+        margin: 0 auto var(--space-8);
+        color: var(--muted-foreground);
+    }
+
+    .not-found-actions {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-3);
+        flex-wrap: wrap;
+        margin-bottom: var(--space-8);
+    }
+
+    .not-found-links {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-4);
+        text-align: left;
+    }
+
+    .not-found-link {
+        display: flex;
+        align-items: center;
+        min-height: 5rem;
+        color: var(--foreground);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .not-found-link:hover {
+        text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+        .not-found {
+            padding-top: var(--space-8);
+        }
+
+        .not-found-card {
+            padding: var(--space-6);
+        }
+
+        .not-found-links {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

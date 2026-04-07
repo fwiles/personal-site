@@ -8,6 +8,12 @@ import cloudflare from '@astrojs/cloudflare';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://fransiscowiles.com',
+  redirects: {
+    '/strategy-call': {
+      destination: '/schedule',
+      status: 301,
+    },
+  },
 
   integrations: [
     sitemap({
