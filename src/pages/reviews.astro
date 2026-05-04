@@ -10,6 +10,9 @@ type Review = {
 };
 
 const reviews = (await import("../../reviews.json")).default as Review[];
+const featuredReviewName = "Kara Prior";
+const featuredReview = reviews.find((review) => review.name === featuredReviewName);
+const standardReviews = reviews.filter((review) => review.name !== featuredReviewName);
 
 const totalReviews = reviews.length;
 const uniqueFirms = new Set(reviews.map((review) => review.firm_name)).size;
@@ -21,6 +24,13 @@ const getInitials = (name: string) =>
         .slice(0, 2)
         .map((part) => part[0].toUpperCase())
         .join("");
+
+const getReviewParagraphs = (review: string) =>
+    review
+        .replace(/\r\n/g, "\n")
+        .split("\n\n")
+        .map((paragraph) => paragraph.trim())
+        .filter(Boolean);
 ---
 
 <Layout
@@ -59,7 +69,56 @@ const getInitials = (name: string) =>
         <div class="container">
             <div class="reviews-grid">
                 {
-                    reviews.map((review) => (
+                    featuredReview && (
+                        <article class="review-card featured-review card">
+                            <div class="review-header">
+                                <div class="review-avatar">
+                                    <img
+                                        src={`/reviews/${featuredReview.picture}`}
+                                        alt={`${featuredReview.name} headshot`}
+                                        class="review-avatar-img"
+                                        width="52"
+                                        height="52"
+                                        loading="lazy"
+                                        decoding="async"
+                                    />
+                                    <span
+                                        class="review-avatar-fallback"
+                                        aria-hidden="true"
+                                    >
+                                        {getInitials(featuredReview.name)}
+                                    </span>
+                                </div>
+                                <div>
+                                    <h3 class="review-name">
+                                        {featuredReview.name}
+                                    </h3>
+                                    <p class="review-title">
+                                        {featuredReview.title} ·{" "}
+                                        {featuredReview.firm_name}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="review-quote" aria-label="Review quote">
+                                {
+                                    getReviewParagraphs(featuredReview.review).map(
+                                        (paragraph, index, paragraphs) => (
+                                            <p>
+                                                {index === 0 ? "“" : ""}
+                                                {paragraph}
+                                                {index === paragraphs.length - 1
+                                                    ? "”"
+                                                    : ""}
+                                            </p>
+                                        ),
+                                    )
+                                }
+                            </div>
+                        </article>
+                    )
+                }
+                {
+                    standardReviews.map((review) => (
                         <article class="review-card card">
                             <div class="review-header">
                                 <div class="review-avatar">
@@ -86,7 +145,21 @@ const getInitials = (name: string) =>
                                     </p>
                                 </div>
                             </div>
-                            <p class="review-quote">“{review.review}”</p>
+                            <div class="review-quote" aria-label="Review quote">
+                                {
+                                    getReviewParagraphs(review.review).map(
+                                        (paragraph, index, paragraphs) => (
+                                            <p>
+                                                {index === 0 ? "“" : ""}
+                                                {paragraph}
+                                                {index === paragraphs.length - 1
+                                                    ? "”"
+                                                    : ""}
+                                            </p>
+                                        ),
+                                    )
+                                }
+                            </div>
                         </article>
                     ))
                 }
@@ -192,6 +265,12 @@ const getInitials = (name: string) =>
         gap: var(--space-4);
     }
 
+    .featured-review {
+        gap: var(--space-5);
+        grid-column: span 2;
+        padding: var(--space-6);
+    }
+
     .review-header {
         display: flex;
         gap: var(--space-4);
@@ -236,9 +315,19 @@ const getInitials = (name: string) =>
     }
 
     .review-quote {
-        margin: 0;
+        display: grid;
+        gap: var(--space-3);
         font-size: 1rem;
         color: var(--foreground);
+    }
+
+    .review-quote p {
+        margin: 0;
+    }
+
+    .featured-review .review-quote {
+        font-size: 1.05rem;
+        line-height: 1.75;
     }
 
     .reviews-cta {
@@ -286,6 +375,10 @@ const getInitials = (name: string) =>
         .reviews-cta-card .btn {
             width: 100%;
             text-align: center;
+        }
+
+        .featured-review {
+            grid-column: span 1;
         }
     }
 </style>
