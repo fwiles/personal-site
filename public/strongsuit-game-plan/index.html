@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="robots" content="noindex, nofollow" />
+<title>StrongSuit Paid Growth Game Plan | Fransisco Wiles</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  /* ============ BRAND TOKENS matched to fransiscowiles.com ============ */
+  :root{
+    --cream:     #FCF8ED;   /* page background (site --background) */
+    --cream-2:   #F4EEDC;   /* raised card on cream       */
+    --ink:       #1A1A1A;   /* headline (site --foreground) */
+    --body-text: #1A1A1A;   /* body copy (site --foreground) */
+    --muted:     #4A4A4A;   /* secondary copy (site --muted-foreground) */
+    --line:      #D9D9D9;   /* hairlines / borders (site --border) */
+    --blue:      #3185FC;   /* signature button blue (site --primary) */
+    --blue-deep: #1E63D0;   /* hover / dark blue          */
+    --blue-tint: #EAF2FF;   /* soft blue fill             */
+    --blue-line: #BFD7FF;   /* soft blue border           */
+    --pos:       #2FBF71;   /* good / keep (site --success) */
+    --neg:       #F2545B;   /* waste / cut (site --destructive) */
+
+    --display: "DM Serif Display", Georgia, serif;
+    --body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    --maxw: 1060px;
+    --pad: clamp(1.25rem, 4.5vw, 3.75rem);
+    --radius: 14px;
+    --shadow: 0 16px 36px -22px rgba(23,19,14,.28);
+    --shadow-sm: 0 8px 20px -14px rgba(23,19,14,.25);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; height:100%; }
+  body{
+    font-family:var(--body);
+    color:var(--body-text);
+    background:var(--cream);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3{ margin:0; font-family:var(--display); font-weight:400; color:var(--ink); line-height:1.06; letter-spacing:-.012em; }
+  p{ margin:0; }
+  ::selection{ background:var(--blue); color:#fff; }
+
+  /* ============ DECK MECHANICS ============ */
+  .deck{
+    display:flex;
+    height:100svh;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .deck::-webkit-scrollbar{ display:none; }
+  @media (prefers-reduced-motion: reduce){
+    .deck{ scroll-behavior:auto; }
+  }
+
+  .slide{
+    position:relative;
+    flex:0 0 100vw;
+    width:100vw;
+    height:100svh;
+    scroll-snap-align:start;
+    scroll-snap-stop:always;
+    overflow-y:auto;
+    overflow-x:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:calc(var(--pad) * .9) var(--pad) calc(var(--pad) * 1.4);
+  }
+  .inner{ width:100%; max-width:var(--maxw); }
+
+  /* ============ SHARED PIECES ============ */
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:.5rem;
+    font-size:.72rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--blue-deep);
+    background:var(--blue-tint);
+    border:1px solid var(--blue-line);
+    padding:.42rem .85rem; border-radius:999px;
+    margin-bottom:1.1rem;
+  }
+  .slide h2{ font-size:clamp(1.85rem, 4.4vw, 3rem); margin-bottom:.85rem; }
+  .lede{ font-size:clamp(1rem, 1.7vw, 1.15rem); line-height:1.6; color:var(--muted); max-width:46ch; margin-bottom:1.8rem; }
+
+  .card{
+    background:#fff;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow-sm);
+    padding:1.15rem 1.3rem;
+  }
+
+  .grid{ display:grid; gap:.9rem; }
+  .grid.cols-2{ grid-template-columns:repeat(2, 1fr); }
+  .grid.cols-3{ grid-template-columns:repeat(3, 1fr); }
+  @media (max-width:820px){
+    .grid.cols-2, .grid.cols-3{ grid-template-columns:1fr; }
+  }
+
+  .card h3{ font-family:var(--body); font-weight:700; font-size:.95rem; color:var(--ink); margin-bottom:.35rem; letter-spacing:-.005em; }
+  .card p{ font-size:.9rem; line-height:1.55; color:var(--body-text); }
+  .card .note{ color:var(--muted); font-size:.82rem; margin-top:.45rem; }
+
+  .tag{
+    display:inline-block; font-size:.7rem; font-weight:700; letter-spacing:.06em;
+    padding:.22rem .6rem; border-radius:999px; margin-bottom:.55rem;
+  }
+  .tag.cut{ background:#FBEBE9; color:var(--neg); border:1px solid #F0CDC8; }
+  .tag.keep{ background:#E8F5EC; color:var(--pos); border:1px solid #C8E6D2; }
+  .tag.blue{ background:var(--blue-tint); color:var(--blue-deep); border:1px solid var(--blue-line); }
+
+  .btn{
+    display:inline-block;
+    background:var(--blue);
+    color:#fff; text-decoration:none;
+    font-weight:600; font-size:.92rem;
+    padding:.75rem 1.4rem; border-radius:9px;
+    box-shadow:var(--shadow-sm);
+  }
+  .btn.ghost{
+    background:transparent; color:var(--blue-deep);
+    border:1.5px solid var(--blue);
+    box-shadow:none;
+  }
+
+  /* ============ SLIDE 1 TITLE ============ */
+  .title-slide .inner{ text-align:center; max-width:860px; }
+  .title-slide h1{
+    font-size:clamp(2.4rem, 6.5vw, 4.4rem);
+    margin:0 auto 1.1rem;
+    max-width:18ch;
+  }
+  .title-slide h1 em{ font-style:italic; color:var(--blue-deep); }
+  .title-slide .sub{
+    font-size:clamp(1rem, 1.9vw, 1.2rem);
+    color:var(--muted); line-height:1.6;
+    max-width:52ch; margin:0 auto 2rem;
+  }
+  .title-slide .who{
+    margin-top:2.6rem; padding-top:1.6rem;
+    border-top:1px solid var(--line);
+    display:flex; flex-wrap:wrap; gap:.5rem 2rem; justify-content:center;
+    font-size:.85rem; color:var(--muted);
+  }
+  .title-slide .who strong{ color:var(--ink); font-weight:600; }
+
+  /* ============ DIAGNOSIS LIST ============ */
+  .diag{ display:grid; gap:.7rem; }
+  .diag .card{ display:flex; gap:1rem; align-items:flex-start; padding:1rem 1.2rem; }
+  .diag .dot{
+    flex:0 0 auto; width:10px; height:10px; border-radius:50%;
+    background:var(--neg); margin-top:.45rem;
+  }
+  .diag p{ font-size:.95rem; }
+  .diag strong{ color:var(--ink); }
+
+  /* ============ TWO LEVERS ============ */
+  .levers{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  @media (max-width:820px){ .levers{ grid-template-columns:1fr; } }
+  .lever{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow-sm); padding:1.6rem 1.5rem;
+  }
+  .lever .big{ font-family:var(--display); font-size:clamp(1.5rem,3vw,2rem); color:var(--ink); margin-bottom:.5rem; }
+  .lever p{ font-size:.92rem; line-height:1.6; color:var(--muted); }
+  .thesis{
+    margin-top:1.2rem; background:var(--blue-tint); border:1px solid var(--blue-line);
+    border-radius:var(--radius); padding:1.1rem 1.3rem;
+    font-size:.95rem; line-height:1.6; color:var(--ink);
+  }
+
+  /* ============ AD MOCK (signature element) ============ */
+  .ad-compare{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:stretch; }
+  @media (max-width:820px){ .ad-compare{ grid-template-columns:1fr; } }
+  .ad{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); overflow:hidden; display:flex; flex-direction:column;
+  }
+  .ad .bar{ display:flex; align-items:center; gap:.6rem; padding:.75rem .95rem; border-bottom:1px solid var(--line); }
+  .ad .avatar{ width:26px; height:26px; border-radius:50%; background:var(--ink); color:var(--cream); font-size:.65rem; font-weight:700; display:flex; align-items:center; justify-content:center; }
+  .ad .brand{ font-size:.78rem; font-weight:700; color:var(--ink); }
+  .ad .sponsored{ font-size:.66rem; color:var(--muted); }
+  .ad .creative{
+    padding:1.4rem 1.1rem; min-height:110px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:var(--display); font-size:clamp(1.05rem, 2vw, 1.3rem); line-height:1.3; color:var(--ink);
+  }
+  .ad.before .creative{ background:var(--cream-2); color:var(--muted); font-style:italic; }
+  .ad.after .creative{ background:var(--blue-tint); }
+  .ad .cta-row{ display:flex; align-items:center; justify-content:space-between; padding:.7rem .95rem; border-top:1px solid var(--line); }
+  .ad .cta-row span{ font-size:.75rem; color:var(--muted); }
+  .ad .mini-btn{ font-size:.72rem; font-weight:700; color:#fff; background:var(--blue); padding:.35rem .8rem; border-radius:6px; }
+  .ad.before .mini-btn{ background:#B9B2A6; }
+
+  /* ============ SEARCH TERM TABLE ============ */
+  .terms{ width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm); font-size:.88rem; }
+  .terms th, .terms td{ text-align:left; padding:.7rem .95rem; border-bottom:1px solid var(--line); }
+  .terms th{ font-size:.7rem; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); background:var(--cream-2); }
+  .terms tr:last-child td{ border-bottom:none; }
+  .terms .verdict{ font-weight:700; }
+  .terms .verdict.cut{ color:var(--neg); }
+  .terms .verdict.keep{ color:var(--pos); }
+  .terms td:first-child{ font-weight:600; color:var(--ink); }
+  .table-wrap{ border-radius:var(--radius); overflow:hidden; }
+
+  /* ============ ROADMAP ============ */
+  .road{ display:grid; grid-template-columns:repeat(3,1fr); gap:.9rem; }
+  @media (max-width:820px){ .road{ grid-template-columns:1fr; } }
+  .phase{ position:relative; background:#fff; border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:1.3rem 1.2rem; }
+  .phase .ph{ font-size:.68rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--blue-deep); margin-bottom:.45rem; }
+  .phase h3{ font-family:var(--display); font-weight:400; font-size:1.3rem; margin-bottom:.4rem; }
+  .phase p{ font-size:.87rem; line-height:1.55; color:var(--muted); }
+  .phase.dim{ background:var(--cream-2); border-style:dashed; }
+
+  /* ============ 30 DAYS ============ */
+  .steps{ display:grid; gap:.65rem; counter-reset:step; }
+  .step{
+    display:flex; align-items:flex-start; gap:1rem;
+    background:#fff; border:1px solid var(--line); border-radius:12px;
+    box-shadow:var(--shadow-sm); padding:.95rem 1.15rem;
+  }
+  .step::before{
+    counter-increment:step; content:counter(step);
+    flex:0 0 auto; width:30px; height:30px; border-radius:50%;
+    background:var(--blue); color:#fff; font-weight:700; font-size:.85rem;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .step div{ font-size:.92rem; line-height:1.5; }
+  .step strong{ color:var(--ink); }
+  .step span{ color:var(--muted); }
+
+  /* ============ MEASURE ============ */
+  .metric-hero{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow); padding:2rem 1.8rem; text-align:center; margin-bottom:1rem;
+  }
+  .metric-hero .m{ font-family:var(--display); font-size:clamp(1.6rem, 3.6vw, 2.4rem); color:var(--ink); max-width:24ch; margin:0 auto .5rem; }
+  .metric-hero p{ color:var(--muted); font-size:.95rem; }
+  .not-list{ display:flex; flex-wrap:wrap; gap:.5rem; justify-content:center; }
+  .not-list span{
+    font-size:.78rem; color:var(--muted); border:1px dashed var(--line);
+    padding:.35rem .8rem; border-radius:999px; text-decoration:line-through;
+  }
+
+  /* ============ CLOSING ============ */
+  .close-slide .inner{ text-align:center; max-width:760px; }
+  .close-slide h2{ font-size:clamp(2rem, 5vw, 3.2rem); margin-bottom:1rem; }
+  .close-slide .lede{ margin:0 auto 2rem; }
+  .close-slide .cta-row{ display:flex; gap:.8rem; justify-content:center; flex-wrap:wrap; }
+  .disclaimer{ margin-top:2.6rem; font-size:.75rem; font-style:italic; color:var(--muted); }
+
+  /* ============ NAV ============ */
+  .navbar{
+    position:fixed; left:0; right:0; bottom:0; z-index:10;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:.7rem var(--pad);
+    background:linear-gradient(to top, var(--cream) 55%, transparent);
+    pointer-events:none;
+  }
+  .navbar > *{ pointer-events:auto; }
+  .counter{ font-size:.75rem; font-weight:600; color:var(--muted); letter-spacing:.06em; }
+  .dots{ display:flex; gap:.42rem; }
+  .dots button{
+    width:8px; height:8px; border-radius:50%; border:none; cursor:pointer;
+    background:var(--line); padding:0; transition:background .2s, transform .2s;
+  }
+  .dots button.active{ background:var(--blue); transform:scale(1.35); }
+  .dots button:focus-visible{ outline:2px solid var(--blue); outline-offset:3px; }
+  .arrows{ display:flex; gap:.45rem; }
+  .arrows button{
+    width:36px; height:36px; border-radius:50%; cursor:pointer;
+    border:1.5px solid var(--blue); background:#fff; color:var(--blue-deep);
+    font-size:1rem; line-height:1; display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow-sm);
+  }
+  .arrows button:hover{ background:var(--blue); color:#fff; }
+  .arrows button:focus-visible{ outline:2px solid var(--blue-deep); outline-offset:2px; }
+  @media (max-width:640px){ .dots{ display:none; } }
+
+  .progress{
+    position:fixed; top:0; left:0; height:3px; z-index:11;
+    background:var(--blue); width:0%;
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<main class="deck" id="deck" tabindex="0" aria-label="StrongSuit game plan slides">
+
+  <!-- 1 · TITLE -->
+  <section class="slide title-slide" aria-label="Title">
+    <div class="inner">
+      <div class="eyebrow">Paid Growth Game Plan · July 2026</div>
+      <h1>Helping StrongSuit turn ad spend into <em>signed law firms</em></h1>
+      <p class="sub">Cut the waste. Sharpen the message. Scale what works. A practical plan for higher-quality pipeline from Meta and Google, built for the way law firms actually buy.</p>
+      <a class="btn" href="#" onclick="goTo(1);return false;">See the plan</a>
+      <div class="who">
+        <span><strong>Fransisco Wiles</strong> · Legal paid media</span>
+        <span>Director of Paid Media, Webris</span>
+        <span>$400k+/mo managed across Google &amp; Meta</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 · WHAT I'M SEEING -->
+  <section class="slide" aria-label="Diagnosis">
+    <div class="inner">
+      <div class="eyebrow">What I'm seeing from the outside</div>
+      <h2>Five things holding the account back</h2>
+      <p class="lede">A quick outside read of the live ads and site. All fixable, and none of it requires more budget.</p>
+      <div class="diag">
+        <div class="card"><span class="dot"></span><p><strong>Every click lands on a generic homepage.</strong> No practice-area benefits above the fold, so high-intent visitors bounce before they see why it matters to them.</p></div>
+        <div class="card"><span class="dot"></span><p><strong>Creative is stale and off-brand.</strong> Old purple assets are still running months after the rebrand: same ads, same look, no new angles tested.</p></div>
+        <div class="card"><span class="dot"></span><p><strong>Search budget is leaking on low-intent queries.</strong> Generic and "free"-style terms attract tire-kickers, not law firms shopping for a real solution.</p></div>
+        <div class="card"><span class="dot"></span><p><strong>Lead quality is diluted.</strong> Instant forms without verification let spam and non-serious submissions through to the sales team.</p></div>
+        <div class="card"><span class="dot"></span><p><strong>No consistent message tying it together.</strong> Taglines describe the product; nothing tells a family law or PI firm what changes for <em>them</em>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · CORE INSIGHT -->
+  <section class="slide" aria-label="Core insight">
+    <div class="inner">
+      <div class="eyebrow">The core insight</div>
+      <h2>Law firms buy four outcomes</h2>
+      <p class="lede">I run acquisition for law firms every day. Every purchase decision ladders up to the same handful of levers.</p>
+      <div class="levers">
+        <div class="lever">
+          <div class="big">Grow revenue</div>
+          <p>More cases signed and serviced without adding headcount. "Double your team's capacity without hiring" is a message partners actually stop for.</p>
+        </div>
+        <div class="lever">
+          <div class="big">Move cases faster</div>
+          <p>Faster case turnover means revenue collected sooner. Settling weeks faster isn't a feature, it's cash flow, and firm owners know it.</p>
+        </div>
+        <div class="lever">
+          <div class="big">Help more people</div>
+          <p>The same team serves more clients. For firms that measure impact as well as income, expanding who they can take on is a message that lands.</p>
+        </div>
+        <div class="lever">
+          <div class="big">Spend time on higher-value work</div>
+          <p>Automate the busywork so attorneys and paralegals focus on strategy and clients, the work that actually wins cases and grows the firm.</p>
+        </div>
+      </div>
+      <div class="thesis"><strong>Every ad, landing page, and webinar in this plan is built to prove one of these outcomes</strong> for a specific practice area, in the firm's own language.</div>
+    </div>
+  </section>
+
+  <!-- 4 · MESSAGING -->
+  <section class="slide" aria-label="Messaging strategy">
+    <div class="inner">
+      <div class="eyebrow">Messaging strategy</div>
+      <h2>From describing the product to proving the result</h2>
+      <p class="lede">Generic platform language gets scrolled past. Results-oriented, practice-area-specific messaging is what's winning in legal AI right now.</p>
+      <div class="ad-compare">
+        <div class="ad before" aria-label="Current generic ad example">
+          <div class="bar"><span class="avatar">SS</span><div><div class="brand">StrongSuit</div><div class="sponsored">Sponsored</div></div></div>
+          <div class="creative">"The most advanced legal AI platform."</div>
+          <div class="cta-row"><span>What's in it for my firm?</span><span class="mini-btn">Learn more</span></div>
+        </div>
+        <div class="ad after" aria-label="Proposed results-oriented ad example">
+          <div class="bar"><span class="avatar">SS</span><div><div class="brand">StrongSuit</div><div class="sponsored">Sponsored</div></div></div>
+          <div class="creative">"How a 15-attorney family law firm doubled case capacity, without hiring."</div>
+          <div class="cta-row"><span>Specific firm, specific outcome</span><span class="mini-btn">See how</span></div>
+        </div>
+      </div>
+      <div class="grid cols-2" style="margin-top:1rem;">
+        <div class="card"><h3>Speak to the two real anxieties</h3><p>Fear of being left behind by competitors, and fear about what AI means for their work, reframed as upside: more earnings, more capacity, same team.</p></div>
+        <div class="card"><h3>One angle per practice area</h3><p>Family law, personal injury, litigation: each gets its own message, proof point, and page. Litigators don't respond to "lawyers in general."</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · LANDING PAGES -->
+  <section class="slide" aria-label="Landing pages">
+    <div class="inner">
+      <div class="eyebrow">Landing pages</div>
+      <h2>Fix the destination in two steps</h2>
+      <p class="lede">Stop sending paid traffic to a generic homepage. We prove the lift with a cleaner page first, then get specific by practice area.</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <span class="tag blue">Step 1 · Prove it</span>
+          <h3>A clearer single landing page</h3>
+          <p>Test one focused page with sharper messaging and the important information above the fold: what StrongSuit does, who it's for, and the outcome, without making visitors scroll or navigate to find it. Establish a real conversion baseline.</p>
+        </div>
+        <div class="card">
+          <span class="tag blue">Step 2 · Get specific</span>
+          <h3>Practice-area pages</h3>
+          <p>Once the cleaner page beats the homepage, split into dedicated pages per practice area, each mirroring its campaign's promise.</p>
+          <p class="note">Family law: capacity and caseload. Personal injury: case velocity and volume. Litigation: output and prep time.</p>
+        </div>
+      </div>
+      <div class="thesis" style="margin-top:1rem;">Low lift on your side: I design and spec every page (or hand your developers production-ready code) and can build and test variants in days, not weeks.</div>
+    </div>
+  </section>
+
+  <!-- 6 · LEAD QUALITY -->
+  <section class="slide" aria-label="Lead quality">
+    <div class="inner">
+      <div class="eyebrow">Lead quality</div>
+      <h2>Force quality first, then reduce friction</h2>
+      <p class="lede">Sales time is the most expensive thing in the funnel. We protect it before we chase volume.</p>
+      <div class="grid cols-3">
+        <div class="card"><span class="tag keep">Turn on</span><h3>Phone (OTP) verification</h3><p>On Meta instant forms. Spam and non-serious submissions won't verify a phone number. Sales only sees real prospects.</p></div>
+        <div class="card"><span class="tag cut">Turn off</span><h3>Flexible form delivery</h3><p>Meta quietly rearranges or drops form questions. We lock the form to high-intent so the qualifying questions always run.</p></div>
+        <div class="card"><span class="tag blue">Expect</span><h3>A short-term cost trade</h3><p>Cost per lead may rise ~10–20% while verification is on. Once a quality baseline is set, we remove friction and bring CPL back down.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · GOOGLE CLEANUP -->
+  <section class="slide" aria-label="Google Ads cleanup">
+    <div class="inner">
+      <div class="eyebrow">Google Ads</div>
+      <h2>Stop paying for the wrong searches</h2>
+      <p class="lede">The fastest win in the account: reallocate spend from low-intent queries to the terms already converting efficiently.</p>
+      <div class="table-wrap">
+        <table class="terms">
+          <thead><tr><th>Search intent</th><th>Who it attracts</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>"free legal AI tool"</td><td>Consumers &amp; one-off users, not firms</td><td class="verdict cut">Pause</td></tr>
+            <tr><td>Generic "AI for legal"</td><td>Blurry intent, high CPA</td><td class="verdict cut">Pause / negative</td></tr>
+            <tr><td>High-intent, sub-target-CPA terms</td><td>Firms actively shopping</td><td class="verdict keep">Double impression share</td></tr>
+            <tr><td>Practice-area + problem terms</td><td>Partners with a specific pain</td><td class="verdict keep">Exact match &amp; expand</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid cols-2" style="margin-top:1rem;">
+        <div class="card"><h3>Tighten the structure</h3><p>Move to exact match with disciplined negative-keyword work. Clear message → clear landing page. No display or PMax noise for this stage.</p></div>
+        <div class="card"><h3>Simple success test</h3><p>Can we double impression share on the efficient terms while holding CPA under target? That's the scale path hiding in the account today.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 · CREATIVE & VIDEO -->
+  <section class="slide" aria-label="Creative and video">
+    <div class="inner">
+      <div class="eyebrow">Creative &amp; video</div>
+      <h2>Video is the biggest lever in legal</h2>
+      <p class="lede">Static ads don't move law firms. Outcome-driven video does. It's how I acquire legal clients today, and it's the gap competitors are exploiting.</p>
+      <div class="grid cols-3">
+        <div class="card"><h3>Refresh to the new brand</h3><p>Retire legacy creative, align everything with current positioning, and cycle fresh angles every 6 to 12 weeks, testing messages, not color swaps.</p></div>
+        <div class="card"><h3>Outcome-based video</h3><p>30–60 second clips per practice area: "How litigators are doubling output," "How PI firms close cases months faster." I provide the scripts.</p></div>
+        <div class="card"><h3>Customer proof</h3><p>Interview your happiest power-user firms, turn their numbers into testimonials, case studies, and webinar material. If filming in-house is hard, I'll arrange production.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · CHANNEL ROADMAP -->
+  <section class="slide" aria-label="Channel roadmap">
+    <div class="inner">
+      <div class="eyebrow">Channel roadmap</div>
+      <h2>Sequence the channels, don't spray them</h2>
+      <p class="lede">Meta and Google have plenty of headroom once the foundations are fixed. Everything else waits until the machine is proven.</p>
+      <div class="road">
+        <div class="phase">
+          <div class="ph">Now</div>
+          <h3>Meta</h3>
+          <p>Verified-lead instant forms, new practice-area angles, video creative. Prove lead quality and cost, then push spend into what wins.</p>
+        </div>
+        <div class="phase">
+          <div class="ph">Next</div>
+          <h3>Google</h3>
+          <p>Where the scale is. Cleaned-up search terms, exact match, focused landing pages, then expand impression share on efficient terms.</p>
+        </div>
+        <div class="phase dim">
+          <div class="ph">Later</div>
+          <h3>LinkedIn</h3>
+          <p>Deliberately parked. Revisit for thought-leadership and brand awareness only once Meta and Google are compounding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · MEASUREMENT -->
+  <section class="slide" aria-label="How we measure success">
+    <div class="inner">
+      <div class="eyebrow">How we measure success</div>
+      <h2>One number that matters</h2>
+      <p class="lede">Everything reports up to a single metric the whole team can rally around.</p>
+      <div class="metric-hero">
+        <div class="m">Booked consultations with qualified law firms</div>
+        <p>Right-sized firms, not solos, not tire-kickers, on your sales team's calendar, week over week.</p>
+      </div>
+      <div class="not-list" aria-label="Metrics we will not optimize for">
+        <span>raw lead volume</span><span>impressions</span><span>clicks</span><span>vanity CPL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · FIRST 30 DAYS -->
+  <section class="slide" aria-label="First 30 days">
+    <div class="inner">
+      <div class="eyebrow">First 30 days</div>
+      <h2>Momentum in the first month</h2>
+      <p class="lede">Nothing launches half-baked. Copy, creative, targeting, and landing pages go live together, so each step sets up the next.</p>
+      <div class="steps">
+        <div class="step"><div><strong>Cut wasteful spend.</strong> <span>Pause low-intent search terms and junk placements. Savings fund the rest of the plan.</span></div></div>
+        <div class="step"><div><strong>Lock the messaging.</strong> <span>Results-oriented angles per practice area, reviewed with your team and legal.</span></div></div>
+        <div class="step"><div><strong>Launch focused landing pages.</strong> <span>One per practice area, matched to its campaign, built to convert.</span></div></div>
+        <div class="step"><div><strong>Refresh creative &amp; verify leads.</strong> <span>New on-brand assets live, OTP verification protecting sales time.</span></div></div>
+        <div class="step"><div><strong>Kick off video &amp; customer proof.</strong> <span>Scripts written, first interviews booked, production path chosen.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · CLOSING -->
+  <section class="slide close-slide" aria-label="Next steps">
+    <div class="inner">
+      <div class="eyebrow">Next steps</div>
+      <h2>Let's put this to work</h2>
+      <p class="lede">Grant access to the Meta and Google accounts and I'll validate this plan against live data in the first week, then we start cutting waste immediately.</p>
+      <div class="cta-row">
+        <a class="btn" href="https://fransiscowiles.com/" target="_blank" rel="noopener">Schedule your FREE strategy session</a>
+        <a class="btn ghost" href="https://fransiscowiles.com/" target="_blank" rel="noopener">What people say about my work</a>
+      </div>
+      <p class="disclaimer">I am a legal marketer, but not your legal marketer. Results may vary based on your specific case.</p>
+    </div>
+  </section>
+
+</main>
+
+<div class="navbar" aria-hidden="false">
+  <div class="counter" id="counter">1 / 12</div>
+  <div class="dots" id="dots" role="tablist" aria-label="Slide navigation"></div>
+  <div class="arrows">
+    <button id="prev" aria-label="Previous slide">←</button>
+    <button id="next" aria-label="Next slide">→</button>
+  </div>
+</div>
+
+<script>
+  const deck = document.getElementById('deck');
+  const slides = Array.from(deck.querySelectorAll('.slide'));
+  const dotsWrap = document.getElementById('dots');
+  const counter = document.getElementById('counter');
+  const progress = document.getElementById('progress');
+  let current = 0;
+
+  slides.forEach((s, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+    b.addEventListener('click', () => goTo(i));
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function goTo(i){
+    i = Math.max(0, Math.min(slides.length - 1, i));
+    deck.scrollTo({ left: i * deck.clientWidth, behavior: 'smooth' });
+  }
+  window.goTo = goTo;
+
+  function sync(){
+    const i = Math.round(deck.scrollLeft / deck.clientWidth);
+    if (i !== current){
+      current = i;
+      dots.forEach((d, j) => d.classList.toggle('active', j === i));
+      counter.textContent = (i + 1) + ' / ' + slides.length;
+    }
+    const max = deck.scrollWidth - deck.clientWidth;
+    progress.style.width = (max ? (deck.scrollLeft / max) * 100 : 0) + '%';
+  }
+  deck.addEventListener('scroll', () => requestAnimationFrame(sync));
+  sync();
+  dots[0].classList.add('active');
+
+  document.getElementById('prev').addEventListener('click', () => goTo(current - 1));
+  document.getElementById('next').addEventListener('click', () => goTo(current + 1));
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+    if (e.key === 'ArrowLeft'  || e.key === 'PageUp') { e.preventDefault(); goTo(current - 1); }
+    if (e.key === 'Home') { e.preventDefault(); goTo(0); }
+    if (e.key === 'End')  { e.preventDefault(); goTo(slides.length - 1); }
+  });
+
+  window.addEventListener('resize', () => {
+    deck.scrollTo({ left: current * deck.clientWidth });
+  });
+</script>
+
+</body>
+</html>
