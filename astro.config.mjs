@@ -21,5 +21,9 @@ export default defineConfig({
     }),
   ],
 
-  adapter: cloudflare(),
+  adapter: cloudflare({
+    // @astrojs/cloudflare v14's default workerd prerender pipeline emits
+    // "[object Object]" for every static page. Prerender in Node instead.
+    prerenderEnvironment: 'node',
+  }),
 });
