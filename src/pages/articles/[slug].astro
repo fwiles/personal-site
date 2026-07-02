@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import {
     buildArticleStructuredData,
@@ -13,7 +13,7 @@ import {
 export async function getStaticPaths() {
     const articles = await getCollection("articles");
     return articles.map((article) => ({
-        params: { slug: article.slug },
+        params: { slug: article.id },
         props: { article },
     }));
 }
@@ -23,14 +23,14 @@ type Props = {
 };
 
 const { article } = Astro.props;
-const { Content } = await article.render();
+const { Content } = await render(article);
 
 const heroVideoEmbedUrl = article.data.heroVideo
     ? toYouTubeEmbedUrl(article.data.heroVideo)
     : "";
 
 const readTimeMinutes = calculateReadTimeMinutes(article.body);
-const canonicalPath = `/articles/${article.slug}`;
+const canonicalPath = `/articles/${article.id}`;
 const articleImage = getArticleImage(article);
 const articleStructuredData = buildArticleStructuredData(
     article,
